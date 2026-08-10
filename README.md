@@ -15,7 +15,7 @@ macOS, Linux, Apple Silicon and Intel.
 ## Desktop app (macOS)
 
 ```sh
-brew install --cask freemkv/tap/freemkv
+brew install --cask freemkv/tap/freemkv-app
 ```
 
 ## Why install this way
