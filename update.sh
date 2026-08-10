@@ -75,7 +75,7 @@ assert i == 4, f"expected 4 sha256 lines in the formula, rewrote {i}"
 open(path, "w").write("\n".join(out))
 PY
 
-C="$SELF_DIR/Casks/freemkv.rb"
+C="$SELF_DIR/Casks/freemkv-app.rb"
 python3 - "$C" "$VER" "$DMG_ARM" "$DMG_X86" <<'PY'
 import re, sys
 path, ver, arm, x86 = sys.argv[1:5]

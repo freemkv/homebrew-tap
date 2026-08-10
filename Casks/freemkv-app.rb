@@ -19,7 +19,16 @@
 # asset built in public by a GitHub Actions workflow you can read. If you would
 # rather have Apple's guarantee, install the .dmg from the releases page and
 # allow it once in System Settings -- do not use this cask.
-cask "freemkv" do
+# NAMED freemkv-app, NOT freemkv, and that matters.
+#
+# Homebrew refuses to symlink a formula when a cask of the same name is
+# installed — it says so and moves on: "freemkv cask is installed, skipping
+# link." So with both named `freemkv`, installing the app and then the CLI left
+# `brew install` reporting success and no `freemkv` command on PATH at all.
+# The docs recommend installing both, so that was the normal path, not an edge
+# case. Distinct names let the two coexist, which is the whole point: they are
+# the same program delivered two ways.
+cask "freemkv-app" do
   arch arm: "aarch64", intel: "x86_64"
 
   version "1.6.3"
