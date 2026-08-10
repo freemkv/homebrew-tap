@@ -32,11 +32,21 @@ cask "freemkv" do
   desc "Rip and remux Blu-ray, UHD, DVD and HD DVD discs to MKV"
   homepage "https://freemkv.org"
 
-  # See the note above. Once the app is notarized this line comes out, and
-  # nothing else about this cask changes.
-  quarantine false
-
   app "freemkv.app"
+
+  # See the note at the top of this file. `quarantine false` is NOT cask DSL --
+  # Homebrew rejects it outright ("undefined method 'quarantine'"), because
+  # disabling the attribute is a decision it leaves to the person installing,
+  # via `--no-quarantine`. Stripping it after the copy is the supported way for
+  # a cask to make that choice on the user's behalf, and it is what lets the app
+  # open on first launch instead of being refused.
+  #
+  # Once the app is notarized this block comes out and nothing else changes.
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-dr", "com.apple.quarantine", "#{appdir}/freemkv.app"],
+                   sudo: false
+  end
 
   # Deliberately NO `binary` stanza for the CLI inside the bundle. The formula
   # in this tap already installs a `freemkv` executable, and both would own that
