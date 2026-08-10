@@ -8,8 +8,10 @@
 class Freemkv < Formula
   desc "Rip and remux Blu-ray, UHD, DVD and HD DVD discs to MKV"
   homepage "https://freemkv.org"
-  version "1.6.2"
   license "MIT"
+  # No explicit `version`: Homebrew scans it from the URL, so bumping the URLs
+  # bumps the version and the two can never disagree. `brew audit` flags a
+  # standalone version here as redundant, and it is.
 
   on_macos do
     on_arm do
