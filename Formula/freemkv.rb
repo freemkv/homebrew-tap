@@ -15,23 +15,23 @@ class Freemkv < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/freemkv/freemkv/releases/download/v1.6.3/freemkv-aarch64-macos-v1.6.3"
-      sha256 "ee0c2071a56588eb397462ddb769a49d213e2ef0acf8a569a0aa274e81a41f99"
+      url "https://github.com/freemkv/freemkv/releases/download/v1.6.4/freemkv-aarch64-macos-v1.6.4"
+      sha256 "2fd6838321484ed42f9f6b6b3042d5440a74ee76e18d273a30ecab8d84216d1c"
     end
     on_intel do
-      url "https://github.com/freemkv/freemkv/releases/download/v1.6.3/freemkv-x86_64-macos-v1.6.3"
-      sha256 "c4dadd0c1aafc6c868156285f6b9c8dfb1b057c6748c88e7acfe6597240dcc3a"
+      url "https://github.com/freemkv/freemkv/releases/download/v1.6.4/freemkv-x86_64-macos-v1.6.4"
+      sha256 "ad4fbe96bc6db0d23c8e2ad0fac652fd48bba5818e0ff3f7fc131e5156865513"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/freemkv/freemkv/releases/download/v1.6.3/freemkv-aarch64-linux-v1.6.3"
-      sha256 "43ca6b571bcd06d68a92380510f19ae840e4e504ff2ddc5e472a348554ca2451"
+      url "https://github.com/freemkv/freemkv/releases/download/v1.6.4/freemkv-aarch64-linux-v1.6.4"
+      sha256 "2778f6cfbff4601b1d78adccf677969d50765fedc823376798aeaedcf8cd7793"
     end
     on_intel do
-      url "https://github.com/freemkv/freemkv/releases/download/v1.6.3/freemkv-x86_64-linux-v1.6.3"
-      sha256 "fd5bd784e1057c3ce2c4a0f572373b99b8cb09f3ed3b60b973e075094dae5fe1"
+      url "https://github.com/freemkv/freemkv/releases/download/v1.6.4/freemkv-x86_64-linux-v1.6.4"
+      sha256 "c7488b3c45d967e3103053ba34c36af9e29e5653df11bf4041025a98b56f6945"
     end
   end
 
