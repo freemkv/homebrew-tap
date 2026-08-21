@@ -31,9 +31,9 @@
 cask "freemkv-app" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "1.6.6"
-  sha256 arm:   "fff9609de44995c5d9cad2dec765637f9fa4f3cb37c85783f0aa352917b29a86",
-         intel: "52f27802ad89334c99c76da907b6f2a0246cec2b77dc854c6c430d1e0350312f"
+  version "1.6.7"
+  sha256 arm:   "72a35e6340fba8f1cfe9ec1acc252fcf850b2660aad4eb1990a0a7b39efd8fb2",
+         intel: "f2e15831e24f8b717e847ed9dfc66f364162125c21df71b0bbe08627e8185cf3"
 
   url "https://github.com/freemkv/freemkv/releases/download/v#{version}/freemkv-v#{version}-#{arch}-apple-darwin.dmg",
       verified: "github.com/freemkv/freemkv/"
