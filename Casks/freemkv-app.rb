@@ -35,11 +35,12 @@ cask "freemkv-app" do
   sha256 arm:   "6b5f9a8734d7d40faf92de2007dafc30031ad8906e9e35e3a382dccd894fdef7",
          intel: "89846c304421f76bb62dc4840b8928123759b7c07e0d285cc7721995a9224bbb"
 
-  url "https://github.com/freemkv/freemkv/releases/download/v#{version}/freemkv-v#{version}-#{arch}-apple-darwin.dmg",
-      verified: "github.com/freemkv/freemkv/"
+  url "https://github.com/freemkv/freemkv/releases/download/v#{version}/freemkv-v#{version}-#{arch}-apple-darwin.dmg"
   name "freemkv"
   desc "Rip and remux Blu-ray, UHD, DVD and HD DVD discs to MKV"
-  homepage "https://freemkv.org"
+  homepage "https://freemkv.org/"
+
+  depends_on :macos
 
   app "freemkv.app"
 
@@ -51,11 +52,16 @@ cask "freemkv-app" do
   # open on first launch instead of being refused.
   #
   # Once the app is notarized this block comes out and nothing else changes.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/freemkv.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args: ["-dr", "com.apple.quarantine", "{{appdir}}/freemkv.app"]
   end
+
+  zap trash: [
+    "~/Library/Application Support/freemkv",
+    "~/Library/Preferences/org.freemkv.gui.plist",
+    "~/Library/Saved Application State/org.freemkv.gui.savedState",
+  ]
 
   # Deliberately NO `binary` stanza for the CLI inside the bundle. The formula
   # in this tap already installs a `freemkv` executable, and both would own that
@@ -75,10 +81,4 @@ cask "freemkv-app" do
     Decrypting a commercial disc needs a key database or a key service:
       freemkv update-keys
   EOS
-
-  zap trash: [
-    "~/Library/Application Support/freemkv",
-    "~/Library/Preferences/org.freemkv.gui.plist",
-    "~/Library/Saved Application State/org.freemkv.gui.savedState",
-  ]
 end
