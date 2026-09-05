@@ -18,6 +18,30 @@ macOS, Linux, Apple Silicon and Intel.
 brew install --cask freemkv/tap/freemkv-app
 ```
 
+## autorip
+
+The unattended ripping daemon:
+
+```sh
+brew install freemkv/tap/autorip
+```
+
+## Firmware tools
+
+`freemkv-flash` (flash/dump drive firmware) and `freemkv-fw` (build/modify
+firmware images) — two tools, each shipping a CLI (formula) and a macOS desktop
+app (cask):
+
+```sh
+# flash — CLI + app
+brew install freemkv/tap/freemkv-flash
+brew install --cask freemkv/tap/freemkv-flash-gui
+
+# modify — CLI + app
+brew install freemkv/tap/freemkv-fw
+brew install --cask freemkv/tap/freemkv-fw-gui
+```
+
 ## Why install this way
 
 A binary downloaded in a browser gets macOS's `com.apple.quarantine`
