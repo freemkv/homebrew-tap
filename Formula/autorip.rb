@@ -9,10 +9,10 @@
 class Autorip < Formula
   desc "Unattended Blu-ray, UHD, DVD and HD DVD ripping daemon for freemkv"
   homepage "https://freemkv.org"
-  version "1.7.0"
   license "MIT"
-  # The release assets are not version-stamped in their filename, so the version
-  # can't be scanned from the URL the way freemkv's is -- state it explicitly.
+  # No explicit `version`: Homebrew scans it from the `v1.7.0` in each URL, so a
+  # release bump moves the URLs and the version together. `brew audit` flags a
+  # standalone version here as redundant.
 
   on_macos do
     on_arm do
