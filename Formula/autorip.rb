@@ -9,26 +9,26 @@
 class Autorip < Formula
   desc "Unattended Blu-ray, UHD, DVD and HD DVD ripping daemon for freemkv"
   homepage "https://freemkv.org"
-  version "1.6.14"
+  version "1.7.0"
   license "MIT"
   # The release assets are not version-stamped in their filename, so the version
   # can't be scanned from the URL the way freemkv's is -- state it explicitly.
 
   on_macos do
     on_arm do
-      url "https://github.com/freemkv/autorip/releases/download/v1.6.14/autorip-aarch64-macos"
-      sha256 "92b3e09e7cfedab6e9eb0e4ad17dd420d823f2694e6a78a3d25d5db6ba44db6f"
+      url "https://github.com/freemkv/autorip/releases/download/v1.7.0/autorip-aarch64-macos"
+      sha256 "c5f718ed45c746d175a4d3f161efdceea0ea230b7247306cc5e3aba22b5bafac"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/freemkv/autorip/releases/download/v1.6.14/autorip-aarch64-linux"
-      sha256 "654068edc71835bb397c2caae627c125132145197ce3c274e76c6f1c6b322c33"
+      url "https://github.com/freemkv/autorip/releases/download/v1.7.0/autorip-aarch64-linux"
+      sha256 "cc9f6a49fcc81a5d17750a922e44e151db91c2485fdd58c9e03c968ffbe7f808"
     end
     on_intel do
-      url "https://github.com/freemkv/autorip/releases/download/v1.6.14/autorip-x86_64-linux"
-      sha256 "56e6357addf8d65ae20ff8e66f540c100cb48bf5165c07610fd812c9693eea2f"
+      url "https://github.com/freemkv/autorip/releases/download/v1.7.0/autorip-x86_64-linux"
+      sha256 "c8ffaf094ca518b84f8b75b7675c10a638754d78708bfca6c4a1fcf19a69d683"
     end
   end
 
