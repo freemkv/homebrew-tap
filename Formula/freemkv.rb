@@ -16,22 +16,22 @@ class Freemkv < Formula
   on_macos do
     on_arm do
       url "https://github.com/freemkv/freemkv/releases/download/v1.7.2/freemkv-aarch64-macos-v1.7.2"
-      sha256 "fe994c3fca832aaf6b0ced8f22e0bdeed255088b052deeae3ef5b30a033620e0"
+      sha256 "7460f34dba12ca3bff83cb17e857b946a27e86261874f432f9c96465ee3be3b7"
     end
     on_intel do
       url "https://github.com/freemkv/freemkv/releases/download/v1.7.2/freemkv-x86_64-macos-v1.7.2"
-      sha256 "c89e6f034cf9d78eefd4c8dca4f7b9405724229d93a16459844089f4d38d49c1"
+      sha256 "8758a582484437a3eb4dae20690d409692d8a5e365a871d9c4186943b124a6cd"
     end
   end
 
   on_linux do
     on_arm do
       url "https://github.com/freemkv/freemkv/releases/download/v1.7.2/freemkv-aarch64-linux-v1.7.2"
-      sha256 "39e3cea4ffe4f47af75fbbdc7bc016a234c6f48ef3b477bcf2a52c0f3ecb4fb1"
+      sha256 "e8a4c2d1d41022436724c75e4f026db596c170b6417b4717aeace1931a213a4c"
     end
     on_intel do
       url "https://github.com/freemkv/freemkv/releases/download/v1.7.2/freemkv-x86_64-linux-v1.7.2"
-      sha256 "10cc60568e385f457200f268047f23833cb6dcd1f9cddfd342ab91bab2652859"
+      sha256 "95bbbc917c4b0c1d0d6031a90ad98596cf8c6a28ba6371a24c28138efdee7344"
     end
   end
 
