@@ -3,20 +3,27 @@
 Install [freemkv](https://freemkv.org) — rip and remux Blu-ray, UHD, DVD and
 HD DVD discs to MKV.
 
-## Command line
-
-```sh
-brew install freemkv/tap/freemkv
-freemkv --version
-```
-
-macOS, Linux, Apple Silicon and Intel.
-
 ## Desktop app (macOS)
 
 ```sh
-brew install --cask freemkv/tap/freemkv-app
+brew install --cask freemkv/tap/freemkv
 ```
+
+Installs `freemkv.app` and the `freemkv` command (the full CLI).
+
+## Command line only
+
+```sh
+brew install freemkv/tap/freemkv-cli
+freemkv --version
+```
+
+macOS, Linux, Apple Silicon and Intel. Installs the same `freemkv` command
+without the app.
+
+The two conflict: install one or the other. Existing `freemkv` (formula) and
+`freemkv-app` (cask) installs are migrated to `freemkv-cli` and `freemkv` by
+`brew update`; if you had both, uninstall one before upgrading.
 
 ## autorip
 
@@ -51,8 +58,8 @@ the old right-click → **Open** bypass no longer exists; the only route is
 System Settings → Privacy & Security → **Open Anyway**, per download.
 
 Homebrew fetches with `curl`, which never sets that attribute, so the formula
-installs and runs with nothing to click through. The cask sets
-`quarantine false` for the same reason.
+installs and runs with nothing to click through. The cask strips the attribute
+after install for the same reason.
 
 That is a real trade, not a trick: it moves the trust decision from Apple's
 notary service to this tap. What you get instead of a notarization ticket is a

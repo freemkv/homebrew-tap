@@ -37,30 +37,32 @@ fetch_sha() {
 }
 
 echo "reading v$VER assets from $REPO"
-CLI_MAC_ARM=$(fetch_sha "freemkv-aarch64-macos-v$VER")
-CLI_MAC_X86=$(fetch_sha "freemkv-x86_64-macos-v$VER")
-CLI_LNX_ARM=$(fetch_sha "freemkv-aarch64-linux-v$VER")
-CLI_LNX_X86=$(fetch_sha "freemkv-x86_64-linux-v$VER")
-DMG_ARM=$(fetch_sha "freemkv-v$VER-aarch64-apple-darwin.dmg")
-DMG_X86=$(fetch_sha "freemkv-v$VER-x86_64-apple-darwin.dmg")
+# Stable (unversioned) asset names. freemkv-cli-* starts with the CLI/app split;
+# older releases lack it, so this cannot rewrite the tap back to one of those.
+CLI_MAC_ARM=$(fetch_sha "freemkv-cli-aarch64-macos")
+CLI_MAC_X86=$(fetch_sha "freemkv-cli-x86_64-macos")
+CLI_LNX_ARM=$(fetch_sha "freemkv-cli-aarch64-linux")
+CLI_LNX_X86=$(fetch_sha "freemkv-cli-x86_64-linux")
+DMG_ARM=$(fetch_sha "freemkv-aarch64-macos.dmg")
+DMG_X86=$(fetch_sha "freemkv-x86_64-macos.dmg")
 
 # Rewrite in place. Each substitution is anchored to the line it belongs to, so
 # a version string appearing in prose or a comment is untouched.
-F="$SELF_DIR/Formula/freemkv.rb"
+F="$SELF_DIR/Formula/freemkv-cli.rb"
 python3 - "$F" "$VER" \
   "$CLI_MAC_ARM" "$CLI_MAC_X86" "$CLI_LNX_ARM" "$CLI_LNX_X86" <<'PY'
 import re, sys
 path, ver, mac_arm, mac_x86, lnx_arm, lnx_x86 = sys.argv[1:7]
 s = open(path).read()
 s = re.sub(r'^  version "[^"]+"$', f'  version "{ver}"', s, flags=re.M)
-s = re.sub(r'/download/v[0-9][^/]*/freemkv-aarch64-macos-v[0-9][^"]*',
-           f'/download/v{ver}/freemkv-aarch64-macos-v{ver}', s)
-s = re.sub(r'/download/v[0-9][^/]*/freemkv-x86_64-macos-v[0-9][^"]*',
-           f'/download/v{ver}/freemkv-x86_64-macos-v{ver}', s)
-s = re.sub(r'/download/v[0-9][^/]*/freemkv-aarch64-linux-v[0-9][^"]*',
-           f'/download/v{ver}/freemkv-aarch64-linux-v{ver}', s)
-s = re.sub(r'/download/v[0-9][^/]*/freemkv-x86_64-linux-v[0-9][^"]*',
-           f'/download/v{ver}/freemkv-x86_64-linux-v{ver}', s)
+s = re.sub(r'/download/v[0-9][^/]*/freemkv-(?:cli-)?aarch64-macos[^"]*',
+           f'/download/v{ver}/freemkv-cli-aarch64-macos', s)
+s = re.sub(r'/download/v[0-9][^/]*/freemkv-(?:cli-)?x86_64-macos[^"]*',
+           f'/download/v{ver}/freemkv-cli-x86_64-macos', s)
+s = re.sub(r'/download/v[0-9][^/]*/freemkv-(?:cli-)?aarch64-linux[^"]*',
+           f'/download/v{ver}/freemkv-cli-aarch64-linux', s)
+s = re.sub(r'/download/v[0-9][^/]*/freemkv-(?:cli-)?x86_64-linux[^"]*',
+           f'/download/v{ver}/freemkv-cli-x86_64-linux', s)
 # The four sha256 lines are positional: each follows the url it belongs to, and
 # the on_macos/on_linux x on_arm/on_intel order in the file is fixed.
 hashes = [mac_arm, mac_x86, lnx_arm, lnx_x86]
@@ -75,7 +77,7 @@ assert i == 4, f"expected 4 sha256 lines in the formula, rewrote {i}"
 open(path, "w").write("\n".join(out))
 PY
 
-C="$SELF_DIR/Casks/freemkv-app.rb"
+C="$SELF_DIR/Casks/freemkv.rb"
 python3 - "$C" "$VER" "$DMG_ARM" "$DMG_X86" <<'PY'
 import re, sys
 path, ver, arm, x86 = sys.argv[1:5]

@@ -1,11 +1,11 @@
-# The freemkv command-line ripper.
+# The freemkv command-line ripper, without the desktop app.
 #
-# Homebrew downloads with curl, and curl does not set the com.apple.quarantine
-# attribute -- only browsers do. So this install is not subject to the Gatekeeper
-# prompt a downloaded binary gets, and works whether or not the binary is
-# notarized. That is why this formula exists: it is the friction-free way to get
-# the CLI on a Mac.
-class Freemkv < Formula
+# Homebrew downloads with curl, which never sets com.apple.quarantine, so the
+# binary runs without a Gatekeeper prompt.
+#
+# Installs `freemkv`, as does the `freemkv` cask (the app build). Only one can
+# be installed; formula DSL cannot declare a cask conflict, so the caveat says it.
+class FreemkvCli < Formula
   desc "Rip and remux Blu-ray, UHD, DVD and HD DVD discs to MKV"
   homepage "https://freemkv.org"
   license "MIT"
@@ -36,13 +36,16 @@ class Freemkv < Formula
   end
 
   def install
-    # The release asset is the bare executable under a versioned name; install
-    # it as plain `freemkv`.
+    # The release asset is the bare executable; install it as `freemkv`.
     bin.install Dir["*"].first => "freemkv"
   end
 
   def caveats
     <<~EOS
+      freemkv-cli and the freemkv cask (the desktop app) both install the
+      `freemkv` command; keep only one. To switch to the app:
+        brew uninstall freemkv-cli && brew install --cask freemkv/tap/freemkv
+
       Decrypting a commercial disc needs a key database (keydb.cfg) or a key
       service. Neither ships with freemkv:
 
