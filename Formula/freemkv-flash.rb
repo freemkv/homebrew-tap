@@ -18,19 +18,19 @@ class FreemkvFlash < Formula
 
   on_macos do
     on_arm do
-      url "https://github.com/freemkv/freemkv-firmware/releases/download/v0.10.2/freemkv-flash-macos-aarch64.tar.gz"
-      sha256 "8bc3f4d3a3d7da4cc5bcca3eb82c94145e5c3568be3faca043ed60e76f2ff215"
+      url "https://github.com/freemkv/freemkv-firmware/releases/download/v0.10.4/freemkv-flash-macos-aarch64.tar.gz"
+      sha256 "90bc66c80f2cc3765a7c5f22d2858153a3f8d050e7c5b0573182b033fb633e55"
     end
     on_intel do
-      url "https://github.com/freemkv/freemkv-firmware/releases/download/v0.10.2/freemkv-flash-macos-x86_64.tar.gz"
-      sha256 "e8281f99af0f9b03187b5b95125bfee399d8e4d2b3294fd4557fcbfaf25e61c2"
+      url "https://github.com/freemkv/freemkv-firmware/releases/download/v0.10.4/freemkv-flash-macos-x86_64.tar.gz"
+      sha256 "62dc5a46d0c3ef8d84c64b4a66386565e93dcb305b39f6af17c8e9d274e5cd1f"
     end
   end
 
   on_linux do
     on_intel do
-      url "https://github.com/freemkv/freemkv-firmware/releases/download/v0.10.2/freemkv-flash-linux-x86_64.tar.gz"
-      sha256 "f241567e5ddcb2d54a075fecc7dd99e56e3ffe3eebc136d2c44d21661ea5b8f3"
+      url "https://github.com/freemkv/freemkv-firmware/releases/download/v0.10.4/freemkv-flash-linux-x86_64.tar.gz"
+      sha256 "0eaf557d933aa55cda3a2d94ccdb679ecb432b181d44584f42b1088636e19eb5"
     end
   end
 
