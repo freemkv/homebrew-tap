@@ -1,4 +1,4 @@
-# The freemkv desktop app.
+# The freemkv desktop app, which also provides the `freemkv` command.
 #
 # WHY `quarantine false`:
 #
@@ -17,25 +17,34 @@
 # service to this tap and the release it points at. What you get instead of a
 # notarization ticket is a pinned sha256, verified on every install, against an
 # asset built in public by a GitHub Actions workflow you can read. If you would
-# rather have Apple's guarantee, install the .dmg from the releases page and
-# allow it once in System Settings -- do not use this cask.
-# NAMED freemkv-app, NOT freemkv, and that matters.
+# rather have Apple's guarantee, there is none to be had yet: no freemkv asset
+# is notarized, and a browser download of the .zip is refused the same way.
 #
-# Homebrew refuses to symlink a formula when a cask of the same name is
-# installed — it says so and moves on: "freemkv cask is installed, skipping
-# link." So with both named `freemkv`, installing the app and then the CLI left
-# `brew install` reporting success and no `freemkv` command on PATH at all.
-# The docs recommend installing both, so that was the normal path, not an edge
-# case. Distinct names let the two coexist, which is the whole point: they are
-# the same program delivered two ways.
-cask "freemkv-app" do
+# WHY the .zip and not a .dmg: the release .dmg was never signed or notarized
+# either (codesign: "not signed"), so it bought nothing over the zip, and
+# freemkv is dropping it. The zip carries the ad-hoc-signed freemkv.app as-is.
+#
+# NAMING. This cask was `freemkv-app` and the CLI formula was `freemkv`, because
+# Homebrew skips linking whichever of a same-named cask/formula pair comes
+# second, and installing both was the documented path. As of 1.8.0 the cask
+# itself links the `freemkv` command, so installing both is no longer needed or
+# recommended: the cask is now `freemkv` and the bare-binary formula is
+# `freemkv-cli` -- install one or the other. cask_renames.json and
+# formula_renames.json at the root of this tap carry existing installs across.
+#
+# There is no `conflicts_with` for this: a cask can only conflict with other
+# casks. If both are installed anyway, whichever is second leaves the other's
+# `freemkv` link in place (the cask warns "from formula freemkv-cli; skipping
+# link", the formula reports `brew link` did not complete) -- one `freemkv` on
+# PATH either way, and it is the same program.
+cask "freemkv" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "1.7.7"
-  sha256 arm:   "613c10dccfe22e1894d917749a1c37ecb6b4b469993121d26651b07583a5e0f8",
-         intel: "bc9e8cbb2559e893137cd5a4526add5d9a93b77e959e50058376ea4851b06453"
+  version "1.8.0"
+  sha256 arm:   "f4d530a4bf5a3f4f3131821928a5e988fbf69f2ec98de74c0b42ad99fc9690ed",
+         intel: "7781236952543c92b6ae94c52fa30a1f5bd9da150e34a402819ed88fa7386373"
 
-  url "https://github.com/freemkv/freemkv/releases/download/v#{version}/freemkv-v#{version}-#{arch}-apple-darwin.dmg"
+  url "https://github.com/freemkv/freemkv/releases/download/v#{version}/freemkv-#{arch}-macos.zip"
   name "freemkv"
   desc "Rip and remux Blu-ray, UHD, DVD and HD DVD discs to MKV"
   homepage "https://freemkv.org/"
@@ -43,6 +52,9 @@ cask "freemkv-app" do
   depends_on :macos
 
   app "freemkv.app"
+  # The app's own executable is the full CLI when given arguments (`--help`,
+  # `info`, `<source> <dest>` ...), so link it as `freemkv`.
+  binary "#{appdir}/freemkv.app/Contents/MacOS/freemkv"
 
   # See the note at the top of this file. `quarantine false` is NOT cask DSL --
   # Homebrew rejects it outright ("undefined method 'quarantine'"), because
@@ -63,20 +75,13 @@ cask "freemkv-app" do
     "~/Library/Saved Application State/org.freemkv.gui.savedState",
   ]
 
-  # Deliberately NO `binary` stanza for the CLI inside the bundle. The formula
-  # in this tap already installs a `freemkv` executable, and both would own that
-  # name -- installing the pair would collide. Anyone who wants the command line
-  # should `brew install freemkv`; the caveat below gives the in-bundle path for
-  # anyone who would rather not.
   caveats <<~EOS
     freemkv is not notarized by Apple. This cask installs it without the
     quarantine attribute so it opens normally; the top of this cask file
     explains what that means for trust.
 
-    The command line is inside the app:
-      /Applications/freemkv.app/Contents/MacOS/freemkv --version
-    or install it on its own with:
-      brew install freemkv/tap/freemkv
+    This cask also links the `freemkv` command. You do not need the
+    freemkv-cli formula as well -- that is the same command without the app.
 
     Decrypting a commercial disc needs a key database or a key service:
       freemkv update-keys

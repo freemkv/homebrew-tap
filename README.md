@@ -3,20 +3,27 @@
 Install [freemkv](https://freemkv.org) — rip and remux Blu-ray, UHD, DVD and
 HD DVD discs to MKV.
 
-## Command line
+## Desktop app + command line (macOS)
 
 ```sh
-brew install freemkv/tap/freemkv
+brew install --cask freemkv/tap/freemkv
 freemkv --version
 ```
 
-macOS, Linux, Apple Silicon and Intel.
+Installs freemkv.app and links the `freemkv` command from inside it.
 
-## Desktop app (macOS)
+## Command line only
 
 ```sh
-brew install --cask freemkv/tap/freemkv-app
+brew install freemkv/tap/freemkv-cli
+freemkv --version
 ```
+
+macOS, Linux, Apple Silicon and Intel. Same `freemkv` command, no app. Install
+one or the other, not both.
+
+Renamed in 1.8.0: the cask was `freemkv-app` and the CLI formula was `freemkv`.
+Existing installs follow the rename on the next `brew update` / `brew upgrade`.
 
 ## autorip
 
@@ -58,9 +65,10 @@ That is a real trade, not a trick: it moves the trust decision from Apple's
 notary service to this tap. What you get instead of a notarization ticket is a
 `sha256` pinned in this repository and verified on every install, against
 release assets built in public by a workflow you can read. If you would rather
-have Apple's guarantee, download the `.dmg` from the
-[releases page](https://github.com/freemkv/freemkv/releases) and allow it once
-in System Settings.
+have Apple's guarantee, there is none to be had yet: no freemkv download is
+notarized, and a copy from the
+[releases page](https://github.com/freemkv/freemkv/releases) has to be allowed
+once in System Settings.
 
 ## Keys
 
@@ -73,5 +81,6 @@ freemkv update-keys
 
 ## Updating
 
-This tap is updated automatically by the freemkv release workflow — the version
-and checksums here are written when a release is published, not by hand.
+This tap is updated automatically by the freemkv and freemkv-firmware release
+workflows (`update.sh`) — the versions and checksums here are written when a
+release is published, not by hand.

@@ -1,6 +1,6 @@
 # The freemkv-flash desktop app ("Flash").
 #
-# WHY the quarantine strip (see Casks/freemkv-app.rb for the full rationale):
+# WHY the quarantine strip (see Casks/freemkv.rb for the full rationale):
 # the app is signed ad-hoc, not notarized (notarization needs a paid Apple
 # Developer account), so macOS refuses a *downloaded* copy that carries
 # com.apple.quarantine. Homebrew fetches with curl (which never sets that
@@ -17,9 +17,9 @@
 cask "freemkv-flash-gui" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "0.7.0"
-  sha256 arm:   "aa54e2aae1e52b3569a458d4e550dad8495883755419f6a4ccc7c2c2b4741513",
-         intel: "c0e60900a121365cdc19a5348b6b32e641e3793063c59b892787788ba2de43f3"
+  version "0.10.1"
+  sha256 arm:   "87557d11ab8a39e26ee1298f6dcabb4c277b0cabf79967ca4de1569e0b3d4aae",
+         intel: "6512ea1bdd84996458d81d664f4f71833bf4cac6b6a5cce59af6fdfb2d49a33e"
 
   url "https://github.com/freemkv/freemkv-firmware/releases/download/v#{version}/freemkv-flash-gui-macos-#{arch}.zip"
   name "freemkv Flash"
@@ -32,7 +32,7 @@ cask "freemkv-flash-gui" do
 
   # `quarantine false` is not cask DSL; stripping the attribute after the copy is
   # the supported way to make that choice on the user's behalf. Removed once the
-  # app is notarized. See Casks/freemkv-app.rb.
+  # app is notarized. See Casks/freemkv.rb.
   postflight_steps do
     run "/usr/bin/xattr",
         args: ["-dr", "com.apple.quarantine", "{{appdir}}/freemkv-flash-gui.app"]
