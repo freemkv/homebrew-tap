@@ -12,7 +12,7 @@ class FreemkvFlash < Formula
   desc "Generic MediaTek/Renesas optical-drive firmware flasher and dumper"
   homepage "https://freemkv.org/firmware/flash/"
   license "MIT"
-  # No explicit `version`: Homebrew scans it from the `v0.7.0` in each URL, so a
+  # No explicit `version`: Homebrew scans it from the version in each URL, so a
   # release bump moves the URLs and the version together and the two can never
   # disagree. `brew audit` flags a standalone version here as redundant.
 

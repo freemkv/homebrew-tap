@@ -10,6 +10,9 @@ class Autorip < Formula
   desc "Unattended Blu-ray, UHD, DVD and HD DVD ripping daemon for freemkv"
   homepage "https://freemkv.org"
   license "MIT"
+  # autorip is retired: freemkv-library (the Docker image ghcr.io/freemkv/freemkv-library,
+  # which also answers to ghcr.io/freemkv/autorip) replaces it from freemkv 1.8.0.
+  disable! date: "2026-10-05", because: "is replaced by the freemkv-library Docker image"
   # No explicit `version`: Homebrew scans it from the `v1.7.0` in each URL, so a
   # release bump moves the URLs and the version together. `brew audit` flags a
   # standalone version here as redundant.
