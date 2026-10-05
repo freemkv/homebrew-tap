@@ -11,15 +11,14 @@
 # .dmg to install by hand: a browser download would be Gatekeeper-blocked, so
 # Homebrew is the only macOS path.
 #
-# NAMED freemkv-fw-gui, distinct from the freemkv-fw formula: a cask and a
-# formula of the same name cannot both link, so the CLI (formula) and the app
-# (cask) carry different names and coexist -- the same tool delivered two ways.
+# NAMED freemkv-fw-gui, distinct from the freemkv-fw formula: the cask is
+# the app plus its CLI, the formula is the CLI alone (like freemkv / freemkv-cli).
 cask "freemkv-fw-gui" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "0.10.1"
-  sha256 arm:   "d59a92527fad0ed431a01f501e1e91d377cfd5ac045d0c31979488529a790bc5",
-         intel: "4313a89b1353fce29e19712c6a18b595214bb71d400b40b8478f5775ddfcb086"
+  version "0.10.2"
+  sha256 arm:   "e680cf6c09be5637185fce9b7532264dc2d9e02a193791cad42a602ea3dd0630",
+         intel: "157e5f1f478794bf20e4fa0fa7620416102426e1847ef58f6a0d1c845b2f5a99"
 
   url "https://github.com/freemkv/freemkv-firmware/releases/download/v#{version}/freemkv-fw-gui-macos-#{arch}.zip"
   name "freemkv Modify"
@@ -29,6 +28,9 @@ cask "freemkv-fw-gui" do
   depends_on :macos
 
   app "freemkv-fw-gui.app"
+  # The app bundles its CLI, as the freemkv cask does; it and the freemkv-fw
+  # formula both provide `freemkv-fw`, so install one or the other.
+  binary "#{appdir}/freemkv-fw-gui.app/Contents/MacOS/freemkv-fw"
 
   # `quarantine false` is not cask DSL; stripping the attribute after the copy is
   # the supported way to make that choice on the user's behalf. Removed once the
@@ -43,17 +45,12 @@ cask "freemkv-fw-gui" do
     "~/Library/Saved Application State/org.freemkv.fw-gui.savedState",
   ]
 
-  # No `binary` stanza for the in-bundle CLI: the freemkv-fw formula already owns
-  # that command name. Install it on its own with `brew install
-  # freemkv/tap/freemkv-fw`, or run it from inside the bundle.
   caveats <<~EOS
     freemkv Modify is not notarized by Apple. This cask installs it without the
     quarantine attribute so it opens normally; the top of this cask file
     explains what that means for trust.
 
-    The command line is inside the app:
-      /Applications/freemkv-fw-gui.app/Contents/MacOS/freemkv-fw-gui --version
-    or install the CLI on its own with:
-      brew install freemkv/tap/freemkv-fw
+    The app also puts the freemkv-fw command on your PATH. It replaces the
+    freemkv-fw formula, so uninstall one before installing the other.
   EOS
 end

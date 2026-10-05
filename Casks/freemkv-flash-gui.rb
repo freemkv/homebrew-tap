@@ -11,15 +11,14 @@
 # .dmg to install by hand: a browser download would be Gatekeeper-blocked, so
 # Homebrew is the only macOS path.
 #
-# NAMED freemkv-flash-gui, distinct from the freemkv-flash formula: a cask and a
-# formula of the same name cannot both link, so the CLI (formula) and the app
-# (cask) carry different names and coexist -- the same tool delivered two ways.
+# NAMED freemkv-flash-gui, distinct from the freemkv-flash formula: the cask is
+# the app plus its CLI, the formula is the CLI alone (like freemkv / freemkv-cli).
 cask "freemkv-flash-gui" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "0.10.1"
-  sha256 arm:   "87557d11ab8a39e26ee1298f6dcabb4c277b0cabf79967ca4de1569e0b3d4aae",
-         intel: "6512ea1bdd84996458d81d664f4f71833bf4cac6b6a5cce59af6fdfb2d49a33e"
+  version "0.10.2"
+  sha256 arm:   "dd70cdddafb32f5592582a786248263de08c8d62b640d4c5e456f817a32ded73",
+         intel: "58aa9096c577660c0cd6e07d939b4774907fc025c61e0fb6409094abec1e36a5"
 
   url "https://github.com/freemkv/freemkv-firmware/releases/download/v#{version}/freemkv-flash-gui-macos-#{arch}.zip"
   name "freemkv Flash"
@@ -29,6 +28,9 @@ cask "freemkv-flash-gui" do
   depends_on :macos
 
   app "freemkv-flash-gui.app"
+  # The app bundles its CLI, as the freemkv cask does; it and the freemkv-flash
+  # formula both provide `freemkv-flash`, so install one or the other.
+  binary "#{appdir}/freemkv-flash-gui.app/Contents/MacOS/freemkv-flash"
 
   # `quarantine false` is not cask DSL; stripping the attribute after the copy is
   # the supported way to make that choice on the user's behalf. Removed once the
@@ -43,17 +45,12 @@ cask "freemkv-flash-gui" do
     "~/Library/Saved Application State/org.freemkv.flash-gui.savedState",
   ]
 
-  # No `binary` stanza for the in-bundle CLI: the freemkv-flash formula already
-  # owns that command name. Install it on its own with `brew install
-  # freemkv/tap/freemkv-flash`, or run it from inside the bundle.
   caveats <<~EOS
     freemkv Flash is not notarized by Apple. This cask installs it without the
     quarantine attribute so it opens normally; the top of this cask file
     explains what that means for trust.
 
-    The command line is inside the app:
-      /Applications/freemkv-flash-gui.app/Contents/MacOS/freemkv-flash-gui --version
-    or install the CLI on its own with:
-      brew install freemkv/tap/freemkv-flash
+    The app also puts the freemkv-flash command on your PATH. It replaces the
+    freemkv-flash formula, so uninstall one before installing the other.
   EOS
 end

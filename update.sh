@@ -135,6 +135,7 @@ if [ "${REPO##*/}" = "freemkv-firmware" ]; then
     G_X86=$(fetch_sha "$bin-gui-macos-x86_64.zip")
     for z in "$bin-gui-macos-aarch64.zip" "$bin-gui-macos-x86_64.zip"; do
       require_in_zip "$z" "$bin-gui.app/Contents/MacOS/$bin-gui"
+      require_in_zip "$z" "$bin-gui.app/Contents/MacOS/$bin"
     done
     rewrite_cask "$SELF_DIR/Casks/$bin-gui.rb" "$G_ARM" "$G_X86"
   done
