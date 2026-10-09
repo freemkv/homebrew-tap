@@ -7,18 +7,18 @@
 class FmvKey < Formula
   desc "Look a disc's AACS unit keys up on the freemkv key service"
   homepage "https://freemkv.org"
-  version "0.1.5"
+  version "0.2.0"
   license "MIT"
 
   depends_on :macos
 
   on_arm do
-    url "https://github.com/freemkv/homebrew-tap/releases/download/fmv-key-v0.1.5/fmv-key-macos-aarch64.tar.gz"
-    sha256 "91c352b4ee84e862d0bed59a64e22b69cb6b9b060de0a673cc6c3adeeaa836b0"
+    url "https://github.com/freemkv/homebrew-tap/releases/download/fmv-key-v0.2.0/fmv-key-macos-aarch64.tar.gz"
+    sha256 "928d7a68bc38c389138f74cbf4fc3637497fa12738e9dadd137005555c80ddf8"
   end
   on_intel do
-    url "https://github.com/freemkv/homebrew-tap/releases/download/fmv-key-v0.1.5/fmv-key-macos-x86_64.tar.gz"
-    sha256 "3b2131e250fce37878e881cd8a72253afc315c87978b9250f7f9eeb70131e875"
+    url "https://github.com/freemkv/homebrew-tap/releases/download/fmv-key-v0.2.0/fmv-key-macos-x86_64.tar.gz"
+    sha256 "40544519158f9d0b8f3603d31599e178346a91159920e5aa6e6856718c8ca346"
   end
 
   def install
