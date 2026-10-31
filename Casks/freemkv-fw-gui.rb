@@ -16,9 +16,9 @@
 cask "freemkv-fw-gui" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "0.15.4"
-  sha256 arm:   "d8dfc2847f8e1487a6166fe1ffb1395af7634866a8a17d801647e64235af1169",
-         intel: "1a8668c4553a25686e47df390824891b120d565fada559b401866ed29a821378"
+  version "0.16.0"
+  sha256 arm:   "3f4fd7167153dc156c91b2fe684a85c525c1c2c8ce730739672053641ea954c3",
+         intel: "738d07566c7d6cb6c0cb3af49a0f2bc564a43892abff3fc410b880986ac2774c"
 
   url "https://github.com/freemkv/freemkv-firmware/releases/download/v#{version}/freemkv-fw-gui-macos-#{arch}.zip"
   name "freemkv Modify"
