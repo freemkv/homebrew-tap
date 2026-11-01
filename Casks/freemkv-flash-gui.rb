@@ -16,9 +16,9 @@
 cask "freemkv-flash-gui" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "0.16.2"
-  sha256 arm:   "226c26c41b3756566f76efa5b6065f362243d7036bc6c6fbda8da7d72296da11",
-         intel: "b44cb54792187e28f422f3d66080135e231a04c35c47861b321a385257c094fd"
+  version "0.17.0"
+  sha256 arm:   "4a7332f238975c20b1d3aa91cdf8d6ab6b2854c5d4aafdc5ab1073b9ee066456",
+         intel: "31de0100076cd74e6d27c37809e6f8ec2af05cf1d8d4b29c4a1dd518dedbbb37"
 
   url "https://github.com/freemkv/freemkv-firmware/releases/download/v#{version}/freemkv-flash-gui-macos-#{arch}.zip"
   name "freemkv Flash"
