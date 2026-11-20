@@ -1,9 +1,9 @@
 # freemkv Homebrew tap
 
-Install [freemkv](https://freemkv.org) — rip and remux Blu-ray, UHD, DVD and
-HD DVD discs to MKV.
+Install [freemkv](https://freemkv.org), which rips and remuxes Blu-ray, UHD,
+DVD and HD DVD discs to MKV.
 
-## Desktop app + command line (macOS)
+## Desktop app and command line (macOS)
 
 ```sh
 brew install --cask freemkv/tap/freemkv
@@ -19,68 +19,63 @@ brew install freemkv/tap/freemkv-cli
 freemkv --version
 ```
 
-macOS, Linux, Apple Silicon and Intel. Same `freemkv` command, no app. Install
-one or the other, not both.
+Works on macOS and Linux, on Apple Silicon and Intel. It is the same `freemkv`
+command without the app. Install one or the other, not both.
 
 Renamed in 1.8.0: the cask was `freemkv-app` and the CLI formula was `freemkv`.
-Existing installs follow the rename on the next `brew update` / `brew upgrade`.
-
-## autorip
-
-The unattended ripping daemon:
-
-```sh
-brew install freemkv/tap/autorip
-```
+Existing installs follow the rename on the next `brew update` and `brew upgrade`.
 
 ## Firmware tools
 
-`freemkv-flash` (flash/dump drive firmware) and `freemkv-fw` (build/modify
-firmware images) — two tools, each shipping a CLI (formula) and a macOS desktop
-app (cask):
+`freemkv-flash` flashes and dumps drive firmware. `freemkv-fw` builds and
+modifies firmware images. Each has a CLI (formula) and a macOS desktop app
+(cask):
 
 ```sh
-# flash — CLI + app
+# flash: CLI and app
 brew install freemkv/tap/freemkv-flash
 brew install --cask freemkv/tap/freemkv-flash-gui
 
-# modify — CLI + app
+# modify: CLI and app
 brew install freemkv/tap/freemkv-fw
 brew install --cask freemkv/tap/freemkv-fw-gui
 ```
 
+## Server
+
+autorip has been replaced by the `freemkv-library` Docker image, and its
+formula is disabled. See the [library docs](https://freemkv.org/docs/library/).
+
 ## Why install this way
 
-A binary downloaded in a browser gets macOS's `com.apple.quarantine`
-attribute, and freemkv is not notarized by Apple — so the download is refused
-with *"Apple could not verify freemkv is free of malware"*. On macOS 15 Sequoia
-the old right-click → **Open** bypass no longer exists; the only route is
-System Settings → Privacy & Security → **Open Anyway**, per download.
+A binary downloaded in a browser gets the `com.apple.quarantine` attribute, and
+freemkv is not notarized by Apple, so macOS refuses it with "Apple could not
+verify freemkv is free of malware". On macOS 15 Sequoia the old right-click and
+Open bypass is gone. The only route is System Settings, Privacy & Security,
+**Open Anyway**, once per download.
 
-Homebrew fetches with `curl`, which never sets that attribute, so the formula
-installs and runs with nothing to click through. The cask sets
-`quarantine false` for the same reason.
+Homebrew fetches with `curl`, which never sets that attribute, so the formulas
+install and run with nothing to click through. The cask sets `quarantine false`
+for the same reason.
 
-That is a real trade, not a trick: it moves the trust decision from Apple's
-notary service to this tap. What you get instead of a notarization ticket is a
-`sha256` pinned in this repository and verified on every install, against
-release assets built in public by a workflow you can read. If you would rather
-have Apple's guarantee, there is none to be had yet: no freemkv download is
-notarized, and a copy from the
+This moves the trust decision from Apple's notary service to this tap. In
+return you get a `sha256` pinned in this repository and checked on every
+install, against release assets built in public by a workflow you can read. No
+freemkv download is notarized yet. A copy from the
 [releases page](https://github.com/freemkv/freemkv/releases) has to be allowed
 once in System Settings.
 
 ## Keys
 
-freemkv ships no key database. Decrypting a commercial disc needs one, or a key
-service:
+freemkv ships no key database. Decrypting a Blu-ray or UHD disc needs a
+`keydb.cfg`:
 
 ```sh
-freemkv update-keys
+freemkv update-keys --url <keydb-url>
 ```
 
 ## Updating
 
-This tap is updated automatically by the freemkv and freemkv-firmware release
-workflows (`update.sh`) — the versions and checksums here are written when a
+The freemkv and freemkv-firmware release workflows update this tap
+automatically through `update.sh`. Versions and checksums are written when a
 release is published, not by hand.
