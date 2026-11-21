@@ -40,9 +40,9 @@
 cask "freemkv" do
   arch arm: "aarch64", intel: "x86_64"
 
-  version "1.8.10"
-  sha256 arm:   "5c54cc4502081813fc25d41f7ef282630f7fb6af4c91432660c136f130930249",
-         intel: "fcea972d870658794cc21d717a33898249604e9d467c9a65f97902b0cbed7d20"
+  version "1.8.11"
+  sha256 arm:   "dda7fca322651e197fa2f8b3e0fbb3689ace8bd76b5317011f28d692cc174fd2",
+         intel: "557b40c56be679f3199ba96fecce9a803a384eaf788ebd1860a4d970af744f2f"
 
   url "https://github.com/freemkv/freemkv/releases/download/v#{version}/freemkv-#{arch}-macos.zip"
   name "freemkv"
